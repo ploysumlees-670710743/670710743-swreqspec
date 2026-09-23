@@ -16,7 +16,7 @@
 - ไฟล์ที่แตะ: backend/app/db/models.py, backend/app/db/session.py, backend/app/db/migrations/001_init.py, backend/tests/conftest.py
 - ต้องทำหลัง: ไม่มี
 - เสร็จเมื่อ: migration สร้างตาราง slots, bookings และ audit_logs ได้พร้อมใช้งานกับ PostgreSQL จริง และ SQLite ในหน่วยความจำสำหรับ test
-- สถานะ: พร้อมทำ
+- สถานะ: เสร็จ รอทีมตรวจ
 
 ### T-02 สร้าง API ค้นช่วงว่างและคำนวณค่าที่เหลือ
 - รองรับ: FR-BKG-01, FR-BKG-06, NFR-PERF-01

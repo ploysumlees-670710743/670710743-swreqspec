@@ -64,3 +64,14 @@
 - ผลลัพธ์: สร้างไฟล์ specs/001-booking/tasks.md โดยแยกงานออกเป็น 13 task ตาม dependency order และตรวจความครบทุก AC และ Constraint
 - งานที่ต้องรอ Open Questions: 1 task (Q-02) เนื่องจากยังไม่มีคำตอบเรื่องรูปแบบหมายเลขคิว
 - ข้อสังเกต: spec อยู่ใน Draft v2 และมี Q-02 ที่ยังไม่ตอบ จึงคง task ที่เกี่ยวข้องกับเลขคิวไว้ในสถานะ “รอ Q-02” ตามนโยบายไม่เดา
+
+---
+
+## 2569-09-23 คำสั่ง: /implement T-01
+
+- เครื่องมือ: Copilot ใน Codespaces
+- ไฟล์: specs/001-booking/tasks.md
+- งานที่ทำ: สร้าง schema และ migration สำหรับ slots, bookings และ audit_logs ตาม requirement ของ T-01
+- ไฟล์ที่สร้าง/แก้: backend/app/db/models.py, backend/app/db/session.py, backend/app/db/migrations/001_init.py, backend/tests/test_T_01_schema.py
+- ผล test: `cd backend && pytest tests/test_T_01_schema.py -q` -> 1 passed in 0.42s
+- สิ่งที่เกือบต้องเดา: ไม่มี; ใช้ spec.md และ plan.md เป็นฐานจริงทั้งหมด และคง Q-02 ไว้ให้รอคำตอบตาม policy
