@@ -75,3 +75,14 @@
 - ไฟล์ที่สร้าง/แก้: backend/app/db/models.py, backend/app/db/session.py, backend/app/db/migrations/001_init.py, backend/tests/test_T_01_schema.py
 - ผล test: `cd backend && pytest tests/test_T_01_schema.py -q` -> 1 passed in 0.42s
 - สิ่งที่เกือบต้องเดา: ไม่มี; ใช้ spec.md และ plan.md เป็นฐานจริงทั้งหมด และคง Q-02 ไว้ให้รอคำตอบตาม policy
+
+---
+
+## 2569-09-23 คำสั่ง: /implement T-09
+
+- เครื่องมือ: Copilot ใน Codespaces
+- ไฟล์: specs/001-booking/tasks.md
+- งานที่ทำ: สร้างหน้าเลือกแพ็กเกจและช่วงเวลาแบบ mocked API ตาม task T-09
+- ไฟล์ที่สร้าง/แก้: frontend/src/pages/SlotPicker.jsx, frontend/src/App.jsx, frontend/src/__tests__/T-09-slot-picker.test.jsx
+- ผล test: `cd frontend && npm test -- --run src/__tests__/T-09-slot-picker.test.jsx` -> 1 passed in 1.35s
+- สิ่งที่เกือบต้องเดา: ไม่มี; ใช้ plan.md และ API contract เพื่อจัดการ mocked response และเปลี่ยนแพ็กเกจตาม spec อย่างตรงไปตรงมา
