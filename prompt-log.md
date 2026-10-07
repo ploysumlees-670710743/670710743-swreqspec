@@ -44,3 +44,23 @@
 - รายงานของ AI: POST /bookings ตรวจยืนยันตัวตน (IF-IDP-01) ตัดที่นั่ง บันทึกการจอง และคืนหมายเลขคิวตาม FR-BKG-04 ถ้าช่วงเวลาเต็มตอบ 409 นอกจากนี้ได้เพิ่ม DELETE /bookings/{id} สำหรับยกเลิกการจอง เพื่อความสมบูรณ์ของระบบ
 - สิ่งที่เกือบต้องเดา: ไม่มี ทำตาม spec ครบ
 - ทีมตรวจ 5 ข้อแล้ว ผ่าน แก้สถานะเป็น "เสร็จ"
+
+---
+
+## 2569-10-07 08:30 คำสั่ง: /verify specs/001-booking/
+
+- เครื่องมือ: Copilot ใน Codespaces (Agent, Auto)
+- ผลลัพธ์: สร้างไฟล์ [specs/001-booking/rtm.md](specs/001-booking/rtm.md) เพื่อรวบรวม traceability ของ spec, task, test และข้อค้นพบ
+- ตรวจพบว่าภาพรวมยังไม่ครบตาม spec: FR-BKG-02, FR-BKG-03, FR-BKG-05, FR-BKG-06, AC-BKG-02 ถึง AC-BKG-06 ยังขาดการตรวจหรือยังไม่เกิดขึ้นจริง
+- ข้อค้นพบสำคัญ: AC-BKG-01 มี test แล้วแต่ยังไม่ผ่านจริงเนื่องจาก service ไม่ป้องกัน full slot และ frontend ยังเป็น placeholder
+- Open Question ที่ยังมีผลต่อความสมบูรณ์: Q-02 (รูปแบบหมายเลขคิว) รอเจ้าหน้าที่เวชระเบียนตอบ
+
+---
+
+## 2569-10-07 08:40 คำสั่ง: แก้เฉพาะ backend/app/booking/service.py เพื่อให้ปฏิเสธเมื่อ remaining <= 0
+
+- เครื่องมือ: Copilot ใน Codespaces (Agent, Auto)
+- สาเหตุ: TC-BKG-01-2 ตรวจว่าจองเมื่อเหลือ 0 ที่ ต้องปฏิเสธ ตาม FR-BKG-02 และ AC-BKG-01
+- การแก้ไข: เปลี่ยนเงื่อนไขจาก `slot.remaining < 0` เป็น `slot.remaining <= 0` ใน `create_booking`
+- ผลการรัน: `cd backend && pytest -v tests/test_AC_BKG_01.py`
+- ผลลัพธ์: 3 passed, 0 failed
