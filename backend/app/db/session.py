@@ -1,28 +1,17 @@
-from __future__ import annotations
-
-import os
-
+# สร้าง engine และ session ของฐานข้อมูล (CON-TECH-01)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from app.db.models import Base
+from app.config import DATABASE_URL
+
+engine = create_engine(DATABASE_URL)
+SessionLocal = sessionmaker(bind=engine, autoflush=False)
 
 
-DEFAULT_DATABASE_URL = "sqlite:///:memory:"
-
-
-def get_database_url() -> str:
-    return os.getenv("DATABASE_URL", DEFAULT_DATABASE_URL)
-
-
-def build_engine(database_url: str | None = None):
-    url = database_url or get_database_url()
-    return create_engine(url, future=True)
-
-
-engine = build_engine()
-SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False, future=True)
-
-
-def init_db() -> None:
-    Base.metadata.create_all(bind=engine)
+def get_db():
+    """ส่ง session ให้ API แต่ละตัว แล้วปิดเมื่อจบ"""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

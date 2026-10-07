@@ -1,15 +1,8 @@
-from __future__ import annotations
-
-from sqlalchemy import Engine
-
-from app.db.models import AuditLog, Base, Booking, Slot
+# migration แรก: สร้างทุกตาราง (T-01)
+# รองรับ CON-TECH-01, DOM-PDPA-01, IF-HIS-01
+from app.db.models import Base
 
 
-def upgrade(engine: Engine) -> None:
-    """Creates the initial booking schema for PostgreSQL and SQLite test databases. Supports CON-TECH-01."""
-    Base.metadata.create_all(bind=engine)
-
-
-def downgrade(engine: Engine) -> None:
-    """Drops the booking schema. Supports schema rollback for local development."""
-    Base.metadata.drop_all(bind=engine)
+def upgrade(engine):
+    """สร้างตาราง slots, bookings, audit_logs"""
+    Base.metadata.create_all(engine)
